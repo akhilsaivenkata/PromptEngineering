@@ -1,5 +1,5 @@
 # PromptEngineering
- Develop a Consult Letter Generation Function for Medical Reports using Chatgpt
+ This application generates a Consult Letter for Medical Reports using OpenAI LLM model
 
 1. Install Python libraries via `pip install -r requirements.txt`
 2. Create a virtual environment if there are any conflicts with dependencies.
