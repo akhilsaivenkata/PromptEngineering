@@ -19,13 +19,12 @@ The input parameters are:
 
 import json
 from typing import Optional
-from openai import OpenAI
 import openai
-from datetime import datetime
+from openai import OpenAI
 
 client = OpenAI(
     # This is the default and can be omitted
-    api_key="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",
+    api_key="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 )
 
 def create_consult_letter(user_info, specialty, note_content, note_date):
@@ -115,8 +114,6 @@ if __name__ == "__main__":
     "Assessment and Plan": "Problem 1:\nPersistent lower back pain\nDDx:\n• Mechanical lower back pain possibly due to poor ergonomics and sedentary lifestyle\n• Discogenic pain\n• Exclusion of serious pathology such as malignancy, infection, or significant neurological compromise\nPlan:\n- Recommend physical therapy focused on lumbar stabilization exercises and posture correction\n- Consider ergonomic assessment of work environment\n- Schedule MRI of the lumbar spine to rule out discogenic or other structural causes\n- Prescribe muscle relaxants for short-term relief\n- Advise on the importance of regular breaks and movement during the workday\n- Follow-up appointment in 4 weeks to assess response to treatment\n- Discuss potential referral to a pain specialist if no improvement"
     }'''
     
-    #MODEL = "gpt-4-1106-preview"
-
     # Generate the consultation letter
     consult_letter = create_consult_letter(user_info, specialty, note_content, note_date)
 
