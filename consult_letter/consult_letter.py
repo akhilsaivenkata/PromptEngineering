@@ -25,7 +25,7 @@ from datetime import datetime
 
 client = OpenAI(
     # This is the default and can be omitted
-    api_key="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",
+    api_key="sk-xx",
 )
 
 def create_consult_letter(user_info, specialty, note_content, note_date):
