@@ -1,7 +1,7 @@
 from openai import OpenAI
 
 # replace it with OpenAI Key
-OPENAI_API_KEY = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+OPENAI_API_KEY = "sk-xx"
 
 def chat_content(**kwargs):
     """

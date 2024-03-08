@@ -24,7 +24,7 @@ from openai import OpenAI
 
 client = OpenAI(
     # This is the default and can be omitted
-    api_key="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    api_key="sk-xx",
 )
 
 def create_consult_letter(user_info, specialty, note_content, note_date):
