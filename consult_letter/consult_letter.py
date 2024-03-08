@@ -79,7 +79,9 @@ your job is to generate a consult letter "},
     response = client.chat.completions.create(
         model="gpt-4-1106-preview",
         messages=messages,
+        #I have used temperature paramter with value 0.2 to get slightly better deterministic results
         temperature = 0.2,
+        # Used seed parameter to get deterministic results for repeated requests of same seed
         seed = 1
     )
 
