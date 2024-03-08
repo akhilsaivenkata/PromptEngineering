@@ -16,22 +16,37 @@ The input parameters are:
     }
 - note_date: a string represents the date of the SOAP note, such as "2022-01-01"
 """
-
+#import necessary libraries
 import json
 from typing import Optional
 import openai
 from openai import OpenAI
 
+# Initialize the OpenAI client and replace it with OpenAI Key
 client = OpenAI(
-    # This is the default and can be omitted
     api_key="sk-xx",
 )
 
 def create_consult_letter(user_info, specialty, note_content, note_date):
+    """
+    This function generates a consult letter based on a SOAP note.
+
+    Parameters:
+    user_info: Dict containing the doctor's name and email.
+    specialty: String indicating the doctor's specialty.
+    note_content: Dict with sections of the SOAP note and their content.
+    note_date: String representing the date of the SOAP note.
+
+    Returns:
+    A string containing the formatted consult letter.
+    """
+    #Fomatting the patient details
     patient_details_formatted = json.dumps(note_content, indent=4)
 
+    #Formatting the doctor details
     doctor_info_formatted = f"Doctor Name: {user_info['name']}\nDoctor Email: {user_info['email']}\nSpecialty: {specialty}\nConsultation Date: {note_date}"
     
+    #This is the example output that we would give it to model to get response in the expected format.
     example_output = """Thank you for your referral of Betty, for Otolaryngology Consultation. She was examined on January 1, 2022.
 
     Betty presented with a chief complaint of left-sided ear pain, which worsens with chewing and is relieved when lying on the contralateral side. She reports intermittent hearing loss and has a history of inconsistent use of a mouthpiece for teeth clenching. There is no past medical or surgical history reported. Betty has an allergy to salt and occasionally uses Reactive for allergies. Her social history includes occasional use of Reactive for allergies.
@@ -49,6 +64,8 @@ def create_consult_letter(user_info, specialty, note_content, note_date):
     Dr. John Doe
     Otolaryngology
     drjohndoe@clinic.com"""
+
+    
     # Prepare the chat messages for the API call
     messages = [
         {"role": "system", "content": "You are a professional medical assistant of Obstetrics & Gynecology (ObGyn), \
@@ -79,19 +96,9 @@ if __name__ == "__main__":
     }
     specialty = "Otolaryngology"
     note_date = "2024-01-01"
-    note_content = {
-    "Patient Name": "James",
-    "Chief Complaint": "Recurrent headaches",
-    "History of Present Illness": "\n• Recurrent tension-type headaches\n• Episodes last from 30 minutes to several hours\n• Typically bilateral with a pressing/tightening quality\n• No nausea or vomiting\n• Photophobia or phonophobia may be present\n• Frequency has increased over the past 2 months",
-    "Social History": "\n• Works as a software developer\n• Reports high levels of work-related stress\n• Non-smoker\n• Exercises regularly",
-    "The Review of Systems": "\n• No recent weight loss\n• Sleep patterns normal\n• No changes in vision\n• No history of seizures",
-    "Current Medications": "\n• Occasional ibuprofen for pain relief",
-    "Allergies": "\n• No known drug allergies",
-    "Physical Examination": "\n• Blood pressure within normal range\n• No neck stiffness\n• Cranial nerves intact\n• No focal neurological deficits\n• Tenderness observed in the pericranial muscles\n• Examination of the eyes, ears, nose, throat, and teeth revealed no abnormalities",
-    "Assessment and Plan": "Problem 1:\nRecurrent tension-type headaches\nDDx:\n• Stress-related tension headaches\n• Migraine without aura (less likely due to absence of nausea/vomiting)\nPlan:\n- Continue monitoring headache frequency and severity\n- Recommended stress management techniques and regular exercise\n- Consider starting a headache diary\n- Scheduled follow-up in 6 weeks to reevaluate\n- May consider referral to neurology if no improvement or if headaches worsen\n- Educated patient on the importance of maintaining a regular sleep schedule and proper hydration\n- Advised against overuse of pain medication to avoid medication-overuse headaches"
-    }
-
-    '''note_content =  {
+    
+    #You can replace this with your own note_content for testing purposes.
+    note_content =  {
         "Patient Name": "Betty",
         "Chief Complaint": "Ear pain",
         "History of Present Illness": "\n• Left-sided ear pain\n• No drainage noted\n• Intermittent hearing loss reported\n• Pain worsens with chewing\n• Inconsistent use of mouthpiece for teeth clenching\n• Pain relief when lying on contralateral side",
@@ -101,18 +108,7 @@ if __name__ == "__main__":
         "Allergies": "\n• Allergic to salt",
         "Physical Examination": "\n• Right ear canal clear\n• Right tympanic membrane intact\n• Right ear space aerated\n• Left ear canal normal\n• Left eardrum normal, no fluid or infection\n• Nose patent\n• Paranasal sinuses normal\n• Oral cavity clear\n• Tonsils absent\n• Good dentition\n• Pain along pterygoid muscles\n• Heart and lungs clear\n• No neck tenderness or lymphadenopathy",
         "Assessment and Plan": "Problem 1:\nEar pain\nDDx:\n• Temporomandibular joint disorder: Likely given the jaw pain, history of teeth clenching, and normal ear examination.\nPlan:\n- Ordered audiogram to check hearing\n- Advised to see dentist for temporomandibular joint evaluation\n- Recommended ibuprofen for pain\n- Suggested soft foods diet\n- Avoid chewing gum, hard candies, hard fruits, ice, and nuts\n- Follow-up if symptoms persist"
-    }'''
-    '''note_content = {
-    "Patient Name": "Sophia",
-    "Chief Complaint": "Persistent lower back pain",
-    "History of Present Illness": "\n• Persistent lower back pain for the last 6 months\n• Pain described as constant, aching, with intermittent sharp episodes\n• Pain exacerbated by sitting for long periods and by bending\n• Minimal relief from over-the-counter painkillers\n• No history of trauma or injury to the area\n• Pain interferes with daily activities and sleep",
-    "Social History": "\n• High school teacher\n• Recently started working from home, leading to increased sedentary lifestyle\n• Non-smoker\n• Minimal physical activity due to pain",
-    "The Review of Systems": "\n• No bladder or bowel incontinence\n• No fever, weight loss, or other systemic symptoms\n• No history of cancer",
-    "Current Medications": "\n• Over-the-counter ibuprofen, as needed for pain",
-    "Allergies": "\n• Penicillin - rash",
-    "Physical Examination": "\n• Normal gait observed\n• Tenderness localized to the lower lumbar region\n• No visible deformities or swelling\n• Range of motion of the lumbar spine reduced due to pain\n• Straight leg raise test negative\n• Neurological examination of the lower extremities normal, with intact reflexes, sensation, and strength",
-    "Assessment and Plan": "Problem 1:\nPersistent lower back pain\nDDx:\n• Mechanical lower back pain possibly due to poor ergonomics and sedentary lifestyle\n• Discogenic pain\n• Exclusion of serious pathology such as malignancy, infection, or significant neurological compromise\nPlan:\n- Recommend physical therapy focused on lumbar stabilization exercises and posture correction\n- Consider ergonomic assessment of work environment\n- Schedule MRI of the lumbar spine to rule out discogenic or other structural causes\n- Prescribe muscle relaxants for short-term relief\n- Advise on the importance of regular breaks and movement during the workday\n- Follow-up appointment in 4 weeks to assess response to treatment\n- Discuss potential referral to a pain specialist if no improvement"
-    }'''
+    }
     
     # Generate the consultation letter
     consult_letter = create_consult_letter(user_info, specialty, note_content, note_date)

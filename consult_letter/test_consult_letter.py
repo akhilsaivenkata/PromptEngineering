@@ -55,8 +55,9 @@ def test_create_consult_letter_with_verification(input_data, expected_verificati
 
     # Generate the consultation letter
     consult_letter = create_consult_letter(user_info, specialty, note_date, note_content)
+
+    #this is just a debug log, you can also avoid it.
     print(consult_letter)
-    print("++++++++++++++++++++")
 
     result = chat_content(
         messages=[
@@ -80,7 +81,7 @@ The consult letter is as following, delimited by ```:
             },
             {
                 "role": "user",
-                "content": "Write me PASS **ONLY** if the consult letter is correct, and FAIL with reason if not.Also specify the reason.",
+                "content": "Write me PASS **ONLY** if the consult letter is correct, and FAIL with reason if not.",
             },
         ]
     )
