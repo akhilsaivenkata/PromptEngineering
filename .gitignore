@@ -1,0 +1,5 @@
+__pycache__/
+consult_letter/__pycache__
+*.pyc
+emp/
+README.md
