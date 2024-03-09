@@ -13,5 +13,6 @@
 If you have any questions regarding the project, please contact
 
  - Sai Venkata Akhil Ammu - ammu4580@mylaurier.ca
+ - Sukhjit Singh Sehra - ssehra@wlu.ca
 
 Special thanks to my professor Sukhjit Singh Sehra for guiding me with this project
