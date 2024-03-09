@@ -9,3 +9,9 @@
 6. You can give new patient data as input parameters to the model to get the desired output
 7. Run tests with `python -m pytest .`
 8. You can also extend no.of test cases to the existing test file.
+
+If you have any questions regarding the project, please contact
+
+ - Sai Venkata Akhil Ammu - ammu4580@mylaurier.ca
+
+Special thanks to my professor Sukhjit Singh Sehra for guiding me with this project
