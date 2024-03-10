@@ -2,8 +2,8 @@
  This application generates a Consult Letter for Medical Reports using OpenAI LLM model
 
 1. Install Python libraries via `pip install -r requirements.txt`
-2. Create a virtual environment if there are any conflicts with dependencies.
-3. Please make sure you have a working API_KEY and replace that in the project wherever required.[execute `python3 -m venv env` and `source env/bin/activate` cmds]
+2. Create a virtual environment if there are any conflicts with dependencies.[execute `python3 -m venv env` and `source env/bin/activate` cmds]
+3. Please make sure you have a working API_KEY and replace that in the project wherever required.
 4. Execute the consult_letter.py file on the terminal to see the output.
 5. Execute with `python consult_letter.py` command
 6. You can give new patient data as input parameters to the model to get the desired output
